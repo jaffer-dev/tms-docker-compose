@@ -1,0 +1,16 @@
+.ant-loading-page {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* position: fixed; ✅ ensures overlay covers the entire screen */
+  top: 0;
+  left: 0;
+  z-index: 9999;
+
+  /* ✅ blur background + semi-transparent dark overlay */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.3); /* transparent dark overlay */
+}

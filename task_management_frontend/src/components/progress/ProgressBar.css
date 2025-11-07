@@ -1,0 +1,49 @@
+.progess-bar-main {
+    padding: 20px;
+    background-color: var(--them-white);
+    border-radius: 16px;
+    border: 1px solid var(--them-stroke);
+    height: 255px;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.progress-report {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+
+    .progress-report-1 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        .report-dot{
+            background: rgb(0, 68, 255);
+            width: 8px;
+            border-radius:50px ;
+            height: 8px;
+        }
+
+        p{
+            color: var(--them-text-gray);
+            font-size: 12px;
+
+            span{
+                color: var(--them-black);
+                font-weight: 700;
+            }
+        }
+    }
+
+}
+
+.progress-report-1 {
+    .blue{
+        background-color: var(--them-stroke) !important;
+    }
+}

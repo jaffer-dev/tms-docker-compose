@@ -1,0 +1,22 @@
+.table-container {
+    background: rgb(255, 255, 255);
+    border-width: 0px;
+    border-style: solid;
+    border-color: rgba(212, 212, 212, 0.692);
+    border-image: initial;
+    border-radius: 16px;
+}
+
+.ant-table-content > table{
+    max-height: 500px;
+}
+
+.c-table {
+
+    background-color: rgba(0, 0, 0, 0);
+    max-height: 100%;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+}

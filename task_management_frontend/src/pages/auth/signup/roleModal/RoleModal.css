@@ -1,0 +1,13 @@
+.role-container{
+    padding: 20px 15px;
+
+    .role-input{
+        width: 100% !important;
+        margin-top: 25px;
+    }
+
+    .ant-form-item-explain-error{
+        font-size: 13px;
+        margin: 6px 10px;
+    }
+}

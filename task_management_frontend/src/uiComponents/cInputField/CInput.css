@@ -1,0 +1,51 @@
+.cinput-container {
+    margin-bottom: 16px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cinput-label {
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: var(--them-black);
+    font-size: 14px;
+}
+
+.cinput-field {
+    width: 100%;
+    padding: 6px 16px !important;
+    border: 1px solid var(--them-stroke) !important;
+    border-radius: 32px !important;
+    font-size: 14px;
+    height: 42px !important;
+    background: var(--them-white);
+    transition: border 0.2s ease, 0.2s ease;
+}
+
+.cinput-field::placeholder{
+    color: #CFCFCF;
+    font-weight: 400;
+    font-size: 1;
+}
+
+.cinput-field:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0px 0px 4px rgba(0, 123, 255, 0.4);
+}
+
+.cinput-field:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+.cinput-error-border {
+    /* border-color: #e63946 !important; */
+}
+
+.cinput-error {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #e63946;
+}

@@ -1,0 +1,7 @@
+.container-wrapper-body {
+    background-color: white !important;
+    height: calc(100vh - 180px);
+    overflow-y: auto;
+    padding-inline: 34px;
+    padding-block: 40px;
+}

@@ -1,0 +1,64 @@
+.tasks-table-view-body{
+    width: 100%;
+}
+
+.tasks-table-view-header{
+    /* width: 100%; */
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: space-between;
+
+
+    .tasks-table-view-header-left{
+        /* width: 100%; */
+        flex: 1;
+
+        :where(.css-dev-only-do-not-override-16dneet).ant-input-group-wrapper{
+            width: 80%;
+        }
+
+        :where(.css-dev-only-do-not-override-16dneet).ant-input-group-wrapper-outlined .ant-input-group-addon:first-child {
+            height: 40px;
+            
+        }
+        :where(.css-dev-only-do-not-override-16dneet).ant-input-group >.ant-input:last-child, :where(.css-dev-only-do-not-override-16dneet).ant-input-group .ant-input-group-addon:last-child{
+            height: 40px;
+            border-start-end-radius: 8px;
+            border-end-end-radius: 8px;
+            background: none;
+            border: 1px solid var(--them-stroke);
+        }
+
+        :where(.css-dev-only-do-not-override-16dneet).ant-input-group-wrapper-outlined .ant-input-group-addon{
+            background: none;
+            border: 1px solid var(--them-stroke);
+        }
+
+        :where(.css-dev-only-do-not-override-16dneet).ant-input-group >.ant-input:first-child, :where(.css-dev-only-do-not-override-16dneet).ant-input-group .ant-input-group-addon:first-child{
+            border-start-end-radius: 0;
+            border-end-end-radius: 0;
+
+            border-start-start-radius: 8px;
+            border-end-start-radius: 8px;
+        }
+        
+    }
+    .tasks-table-view-header-right{
+        flex: 1;
+        /* width: 100%; */
+    }
+}
+
+.tasks-table-view-header-right{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+}
+
+.board-view-more{
+    color: var(--them-stroke);
+    text-align: end;
+    margin-top: 20px;
+}

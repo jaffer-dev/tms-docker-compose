@@ -1,0 +1,7 @@
+.taskhistory-body {
+  overflow-x: auto;
+}
+
+.responsive-task-table {
+  min-width: 800px; 
+}

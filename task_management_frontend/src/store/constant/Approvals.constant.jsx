@@ -1,0 +1,9 @@
+const APPROVALS = {
+
+    GET_APPROVALS: 'GET_APPROVALS',
+
+    APPROVALS_ACTION : 'APPROVALS_ACTION'
+
+};
+
+export default APPROVALS;

@@ -1,0 +1,67 @@
+require("dotenv").config();
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const authRoutes = require('./routes/auth');
+const teamRoutes = require('./routes/team');
+const membersRoutes = require('./routes/member');
+const usersRoutes = require('./routes/users');
+const notificationsRoutes = require('./routes/notifications');
+const otpRoutes = require('./routes/otp');
+const commentsRoutes = require('./routes/comments');
+const approvalRoutes = require('./routes/approvals');
+const tasksRoutes = require('./routes/tasks');
+const morgan = require("morgan");
+
+
+const app = express();
+const path = require("path");
+console.log("server is ready to respond:")
+app.use(morgan('dev'))
+app.use(cors());
+app.use(express.json());
+app.use(express.static('public'));
+
+app.get('/test', (req, res) => {
+  res.json({ message: 'Morgan test' });
+});
+// Use your MongoDB Atlas connection string from .env
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then(() => console.log('MongoDB connected'))
+  .catch((err) => console.error('MongoDB error:', err));
+
+
+// routes  
+app.use('/api/auth', authRoutes);
+app.use('/api/department', teamRoutes);
+app.use('/api/members', membersRoutes);
+app.use('/api/user', usersRoutes);
+app.use('/api/notification' , notificationsRoutes);
+app.use('/api/otp' , otpRoutes);
+app.use('/api/comments' , commentsRoutes);
+app.use('/api/approvals' , approvalRoutes);
+app.use('/api/task' , tasksRoutes);
+
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.get('/change-password', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'password-change.html'));
+});
+
+app.use('*', (req, res) => {
+  console.log('🚨 Unhandled route:', req.originalUrl);
+  console.log('🚨 Method:', req.method);
+  res.status(404).json({ error: 'Route not found' });
+});
+
+app.use((err, req, res, next) => {
+  console.error('💥 Unhandled Error:', err);
+  res.status(500).json({ error: 'Internal Server Error' });
+});
+
+
+// Use PORT from .env file
+const PORT = process.env.PORT || 5000;
+app.listen(PORT ,'0.0.0.0',  () => console.log(`Server running on port ${PORT}`));

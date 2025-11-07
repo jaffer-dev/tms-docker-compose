@@ -1,0 +1,69 @@
+.chart {
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 16px;
+    padding:25px;
+    height: 255px;
+    font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .chart-heading {
+    /* margin-right: 20px; */
+    margin: 0 0 20px 20px;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: var(--instrument);
+  }
+  
+  .chart-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  
+  .axis-tick {
+    font-size: 12px;
+    fill: #6b7280;
+    font-weight: 500;
+  }
+  
+  .chart-tooltip {
+    font-size: 13px !important;
+    color: var(--them-black) !important;
+    border: 1px solid #e5e7eb !important;
+    background: #ffffff !important;
+    border-radius: 10px !important;
+    padding: 6px 10px !important;
+  }
+  
+
+  .chart-skeleton {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 220px;
+    padding: 0 10px;
+  }
+  
+  .skeleton-bar {
+    width: 28px;
+    height: 160px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+  }
+  
+  @keyframes skeleton-loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  

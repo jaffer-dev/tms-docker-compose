@@ -1,0 +1,36 @@
+/* .page-header-filters{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+} */
+
+.leave-icons {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.leave-icon-reject,
+.leave-icon-check {
+    height: 36px;
+    width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 32px;
+}
+
+.leave-icon-reject {
+    color: var(--them-red);
+    font-size: 20px;
+    background-color: #F905051A;
+}
+
+.leave-icon-check {
+    font-size: 16px;
+    color: var(--them-white);
+    background-color: var(--them-primary);
+}

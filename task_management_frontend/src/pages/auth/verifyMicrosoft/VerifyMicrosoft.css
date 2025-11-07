@@ -1,0 +1,72 @@
+.verify-container {
+    display: flex;
+    flex-direction: column;
+    /* stack logo above text */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f9fafb;
+    /* light neutral background */
+    text-align: center;
+}
+
+/* Microsoft logo with a soft purple glow & floating animation */
+.ms-logo {
+    width: 120px;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px #4f46e5);
+    /* purple glow to match text */
+}
+
+/* Text color matches the glow for a unified look */
+.verify-text {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #4f46e5;
+}
+
+/* Animated blinking dots */
+.dot {
+    animation: blink 1.4s infinite both;
+}
+
+.dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+
+    0%,
+    80%,
+    100% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 1;
+    }
+}
+
+/* Smooth floating motion for the logo */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}

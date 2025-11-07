@@ -1,0 +1,130 @@
+.count-main {
+    width: 100%;
+  }
+  
+  .count-cards {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+   
+}
+  
+  .count-card-body {
+    min-width: 190px;
+    width: 100%;
+    flex: 1;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border: 1px solid var(--them-stroke);
+    overflow: hidden;  
+    position: relative;
+    background-color: var(--them-white);
+    cursor: pointer;
+  }
+  
+  .count-card-blue {
+    background-color: var(--them-primary);
+  }
+  
+  .count-card-blue .count-title > h4,
+  .count-card-blue .count-stats > h3 {
+    color: var(--them-white);
+    font-family: var(--instrument);
+  }
+  
+  .count-title > h4 {
+    font-size: 14px;
+    font-weight: 500;
+    font-family: var(--instrument);
+    color: var(--them-text-gray);
+  }
+  
+  .count-stats > h3 {
+    font-size: 24px;
+    font-weight: 500;
+    font-family: var(--instrument);
+    color: var(--them-black);
+  }
+  
+  .count-card-in-progress::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 15px;
+    border-radius: 8px;
+    background: #a18fff33;
+     filter: blur(16px);
+    z-index: 0;
+  }
+  
+  .count-card-pending::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 10px;
+    border-radius: 8px;
+    background: #7f921233; 
+      filter: blur(16px);
+    z-index: 0;
+  }
+  
+  .count-card-assigned::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 10px;
+    border-radius: 8px;
+    background: #cb840a33;
+       filter: blur(16px);
+    z-index: 0;
+  }
+  
+  .count-card-review::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 10px;
+    border-radius: 8px;
+    background: #01b17033; 
+        filter: blur(16px);
+    z-index: 0;
+  }
+  
+  .count-card-closed::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 10px;
+    border-radius: 8px;
+    background: #b1010133; 
+    filter: blur(16px);
+    z-index: 0;
+  }
+  
+  .card-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+}

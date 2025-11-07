@@ -1,0 +1,16 @@
+.otpModal-card {
+    max-width: 370px;
+    width: 100%;
+    border-radius: 16px;
+}
+
+.verify-otp-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: 40px;
+}
+
+.otp-instructions{
+    margin-bottom: 20px;
+}

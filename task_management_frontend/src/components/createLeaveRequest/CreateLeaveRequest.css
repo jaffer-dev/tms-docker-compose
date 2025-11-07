@@ -1,0 +1,11 @@
+.uploaded-file-item {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f5f9ff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #d6e4ff;
+}

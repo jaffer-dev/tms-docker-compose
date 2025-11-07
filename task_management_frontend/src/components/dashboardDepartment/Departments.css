@@ -1,0 +1,76 @@
+.departments-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.department-card {
+  background-color: var(--them-surface);
+  border: 1px solid var(--them-stroke);
+  border-radius: 16px;
+  min-height: 90px;
+  transition: transform 0.3s ease, 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.department-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.department-header {
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.department-header h3 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 170%;
+  font-family: var(--instrument);
+}
+
+.department-header p {
+  margin: 3px 0 0;
+  color: var(--them-primary);
+  font-weight: 600;
+  font-family: var(--instrument);
+  font-size: 14px;
+}
+
+.department-footer {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.department-icon {
+  height: 40px;
+  object-fit: contain;
+}
+
+.empty-wrapper {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  width: 100%;
+}
+
+.empty-wrapper .ant-empty {
+  margin: 0;
+}
+
+
+.departments-loading {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+}

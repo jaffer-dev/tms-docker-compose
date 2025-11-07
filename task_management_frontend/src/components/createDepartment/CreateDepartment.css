@@ -1,0 +1,88 @@
+/* Modal Styling */
+.create-team-modal .ant-modal-content {
+  border-radius: 20px;
+  padding: 32px !important;
+  background: #fff;
+  border: none;
+}
+
+.form-input {
+  border: 1px solid var(--them-stroke) !important;
+  height: 42px !important;
+  border-radius: 32px !important;
+  padding: 6px 16px !important;
+  background: var(--them-white);
+  width: 100%;
+}
+
+.form-input:hover,
+.form-textarea:hover {
+  border-color: #2563eb;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.form-textarea {
+  border-radius: 12px;
+  border: 1px solid var(--them-stroke) !important;
+  transition: all 0.2s ease;
+  padding: 10px 14px;
+}
+
+.form-header {
+  margin-bottom: 24px;
+}
+
+.form-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.form-subtitle {
+  font-size: 15px;
+  color: #6b7280;
+  font-family: var(--instrument);
+}
+
+.form-hint {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  padding-top: 16px;
+}
+
+
+.cancel-button {
+  /* width: 125px; */
+  height: 36px;
+  background: var(--them-white);
+  padding: 6px 16px;
+  border-radius: 56px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--them-primary);
+  font-family: var(--instrument);
+}
+
+.submit-button {
+  width: 125px;
+  height: 42px;
+  background: var(--them-primary);
+  padding: 6px 16px;
+  border-radius: 56px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--them-white);
+  font-family: var(--instrument);
+}

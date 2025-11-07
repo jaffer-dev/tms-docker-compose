@@ -1,0 +1,38 @@
+.task-list-container{
+    width: 100%;
+}
+.task-list-body{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+     flex-direction: row;
+}
+.task-list-todo{
+    width: 100%;
+    min-width: 400px; 
+
+}
+.task-list-to-review{
+    width: 100%;
+    min-width: 400px; 
+}
+
+@media (max-width: 768px) {
+  .task-list-body {
+    flex-direction: column;
+  }
+
+  .task-list-todo,
+  .task-list-to-review {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+
+.employees-list-main {
+  width: 100%;
+  overflow-x: auto;  /* allow horizontal scroll */
+}

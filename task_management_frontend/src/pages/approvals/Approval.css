@@ -1,0 +1,13 @@
+.approval-right {
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: end;
+    gap: 6px;
+}
+
+.blur-bg {
+   filter: blur(6px); /* Blur background */
+  pointer-events: none; /* Prevent clicks behind modal */
+  user-select: none;
+
+}
