@@ -23,11 +23,16 @@ app.get("/", (req, res) => res.send("API is running..."));
 const PORT = process.env.PORT || 5000;
 
 // HTTPS setup
-const httpsOptions = {
-  key: fs.readFileSync(path.join(__dirname, "ssl/key.pem")),
-  cert: fs.readFileSync(path.join(__dirname, "ssl/cert.pem"))
-};
+// const httpsOptions = {
+//   key: fs.readFileSync(path.join(__dirname, "ssl/key.pem")),
+//   cert: fs.readFileSync(path.join(__dirname, "ssl/cert.pem"))
+// };
 
-https.createServer(httpsOptions, app).listen(PORT, "0.0.0.0", () => {
-  console.log(`Server running on https://0.0.0.0:${PORT}`);
+// https.createServer(httpsOptions, app).listen(PORT, '0.0.0.0',() => {
+//   console.log(`Server running on ${PORT}`);
+// });
+
+
+app.listen(PORT, '0.0.0.0',() => {
+  console.log(`Server running on ${PORT}`);
 });
