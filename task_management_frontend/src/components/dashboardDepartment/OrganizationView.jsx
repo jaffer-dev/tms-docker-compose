@@ -18,7 +18,6 @@ const OrganizationView = () => {
                 <div className="teams-header-left">
                     <div className="teams-heading">
                         <h3>Department</h3>
-
                     </div>
                     <div className="teams-segments">
                         <Segmented
@@ -28,10 +27,7 @@ const OrganizationView = () => {
                     </div>
                 </div>
                 <div className="teams-header-right">
-
                 </div>
-
-
             </div>
 
             <div className="teams-body">

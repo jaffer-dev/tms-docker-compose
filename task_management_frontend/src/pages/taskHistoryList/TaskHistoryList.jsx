@@ -139,7 +139,6 @@ const TaskHistoryList = () => {
 
   const pageHeaderProps = {
     title: 'Tasks',
-    // renderBack: true
   }
 
   const handleChange = (val, name) => {

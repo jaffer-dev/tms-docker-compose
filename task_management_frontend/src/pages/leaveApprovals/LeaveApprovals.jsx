@@ -7,18 +7,19 @@ import "./LeaveApprovals.css"
 import { leaveApprovals } from '../../store/actions/Leaves.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { ConditionalRendering, renderDate } from '../../utils/Methods';
+import { ConditionalRendering, readableText, renderDate } from '../../utils/Methods';
 import { MdOutlineCancel } from 'react-icons/md';
 import Details from './Details';
-import { Button, Popconfirm, Space } from 'antd';
+import { Badge, Button, Input, Modal, Popconfirm, Space, Tag } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
+import { TiMessages } from "react-icons/ti";
 
 const LeaveApprovals = () => {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const [selected, setSelected] = useState({})
+    const [isRemarksModalOpen, setIsRemarksModalOpen] = useState(false);
 
     const { data, loading, userRole } = useSelector(({ leaves, auth }) => ({
         data: leaves?.leaveApprovalData,
@@ -37,7 +38,6 @@ const LeaveApprovals = () => {
 
     const pageHeaderProps = {
         title: 'Leave - WFH Approvals',
-        // renderBack: true
     };
 
     const columns = [
@@ -47,15 +47,15 @@ const LeaveApprovals = () => {
             render: (val, record) => val || record.userId?.username || '-',
         },
         {
-            title: 'Reason',
+            title: 'Description',
             dataIndex: 'reason',
             render: (val) => val || '-',
         },
-        {
-            title: 'Department',
-            dataIndex: ['userId', 'department'],
-            render: (val, record) => val || record.userId?.department || '-',
-        },
+        // {
+        //     title: 'Department',
+        //     dataIndex: ['userId', 'department'],
+        //     render: (val, record) => val || record.userId?.department || '-',
+        // },
         {
             title: 'Type',
             dataIndex: 'category',
@@ -79,7 +79,42 @@ const LeaveApprovals = () => {
         {
             title: 'Status',
             dataIndex: 'status',
-            render: (val) => val || '-',
+            render: (val) =>
+                <Tag className='approval-tag' color={val === 'PENDING' || val === 'REJECTED' ? "red" : "green"}>
+                    {readableText(val) || '-'}
+                </Tag>
+        },
+        {
+            title: 'Remarks',
+            dataIndex: 'remarks',
+            render: (val, record) => (
+                <>
+                    <Badge
+                        count="1"
+                        size="small"
+                        onClick={() => setIsRemarksModalOpen(true)}
+                        style={{ cursor: 'pointer' }}
+                    >
+                        <TiMessages className='reason-icon' />
+                    </Badge>
+
+                    <Modal
+                        open={isRemarksModalOpen}
+                        onCancel={() => setIsRemarksModalOpen(false)}
+                        footer={null}
+                    >
+                        <div className="remarksModal">
+                            <h1 className='form-title margin-bottom-20'>Remarks</h1>
+                            <Input.TextArea
+                                rows={4}
+                                defaultValue={record.remarks || ""}
+                                placeholder="Remarks"
+                                readOnly
+                            />
+                        </div>
+                    </Modal>
+                </>
+            )
         },
         {
             title: 'Action',
@@ -113,24 +148,6 @@ const LeaveApprovals = () => {
                 </Space>
             ),
         },
-        // {
-        //     title: 'Actions',
-        //     dataIndex: 'actions',
-        //     render: (_, record) => (
-        //         <div className='leave-icons'>
-        //             <div className="leave-icon-reject">
-        //                 <MdOutlineCancel
-        //                 // onClick={() => console.log("Comments for:", record._id)}
-        //                 />
-        //             </div>
-        //             <div className="leave-icon-check">
-        //                 <FaCheck
-        //                 // onClick={() => navigate(`/leave-details/${record._id}`)}
-        //                 />
-        //             </div>
-        //         </div>
-        //     ),
-        // },
     ];
 
     return (

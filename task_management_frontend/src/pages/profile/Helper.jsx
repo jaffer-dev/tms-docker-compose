@@ -2,10 +2,10 @@ import React from 'react';
 import { Descriptions, Divider } from "antd";
 import { readableText, renderDate } from '../../utils/Methods';
 
-export const renderPrimaryDetails = ( userdata ) => {
+export const renderPrimaryDetails = (userdata) => {
   const items = [
     { key: '1', label: 'Name', children: readableText(userdata.username || '-') },
-    { key: '2', label: 'Email', children: readableText(userdata.email || '-') },
+    { key: '2', label: 'Email', children: userdata.email || '-' },
     { key: '3', label: 'Role', children: readableText(userdata.role || '-') },
     { key: '4', label: 'Designation', children: readableText(userdata.personalDetails?.designation || '-') },
     { key: '5', label: 'Department', children: readableText(userdata.department || '-') },
@@ -27,10 +27,10 @@ export const renderPrimaryDetails = ( userdata ) => {
   );
 };
 
-export const renderSecondaryDetails = ( userdata ) => {
+export const renderSecondaryDetails = (userdata) => {
   const items = [
-    { key: '1', label: 'Full Name', children: readableText(userdata.personalDetails?.fullName || '-') },
-    { key: '2', label: 'Father Name', children: readableText(userdata.personalDetails?.fatherName || '-') },
+    { key: '1', label: 'Full Name', children: userdata.personalDetails?.fullName || '-' },
+    { key: '2', label: 'Father Name', children: userdata.personalDetails?.fatherName || '-' },
     { key: '3', label: 'Gender', children: readableText(userdata.personalDetails?.gender || '-') },
     { key: '4', label: 'Marital Status', children: readableText(userdata.personalDetails?.maritalStatus || '-') },
     { key: '5', label: 'Nationality', children: readableText(userdata.personalDetails?.nationality || '-') },
@@ -53,11 +53,11 @@ export const renderSecondaryDetails = ( userdata ) => {
   );
 };
 
-export const renderContactDetails = ( userdata ) => {
+export const renderContactDetails = (userdata) => {
   const items = [
     { key: '1', label: 'Emergency Contact No', children: readableText(userdata.personalDetails?.alternateContactNo || '-') },
     { key: '2', label: 'Emergency Contact Name', children: readableText(userdata.personalDetails?.emergencyContactName || '-') },
-    { key: '3', label: 'Emergency Contact Relationship', children: readableText(userdata.personalDetails?.relationship || '-') },
+    { key: '3', label: 'Emergency Contact Relation', children: readableText(userdata.personalDetails?.relationship || '-') },
   ];
 
   return (

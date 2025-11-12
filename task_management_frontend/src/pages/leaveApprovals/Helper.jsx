@@ -11,7 +11,6 @@ export const renderTaskDetails = (obj) => {
         { key: '6', label: 'Approval Status', children: <Tag color={obj?.status === 'PENDING' ? "red" : "green"} className='approval-tag'>{readableText(obj?.status || '-')}</Tag>, },
         { key: '7', label: 'Requested At', children: renderDate(obj?.requestedAt) },
         { key: '8', label: 'Reason', span: 2, children: readableText(obj?.reason || '-') },
-        { key: '9', label: 'Reason', span: 2, children: readableText(obj?.reason || '-') },
     ];
 
     return (
@@ -25,9 +24,7 @@ export const renderTaskDetails = (obj) => {
                 items={items}
                 className="custom-descriptions"
             />
-
         </>
-
     )
 };
 
@@ -41,7 +38,6 @@ export const renderAssigneeDetails = (obj) => {
 
     return (
         <>
-
             <Divider orientation="left">Employee Information</Divider>
             <Descriptions
                 size="small"

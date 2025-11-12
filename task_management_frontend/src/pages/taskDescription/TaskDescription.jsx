@@ -9,7 +9,6 @@ import Loader from '../../components/loader/Loader';
 import { getTaskDetails, submitForReview, setStatus } from '../../store/actions/Task.action';
 import { ConditionalRendering, readableText, renderDate, TASK_PRIORITY_COLORS, TASK_STATUS_COLORS, TASK_STATUS_ICONS, TASK_TYPE_COLORS } from '../../utils/Methods';
 import { AssignTaskModal } from '../../components';
-import { UserAvatar } from '../../components/userAvatar/UserAvatar';
 import { handleUpload, handleRemoveFile, generateTaskPDF, fileBlog } from './Helper';
 import './TaskDescription.css';
 import TaskComments from '../../components/taskComments/TaskComments';
@@ -109,7 +108,7 @@ const TaskDetails = () => {
     taskDetails?.assignTo?.some(a => a?._id !== userId);
 
   const items = [
-    { key: "TODO", label: "Todo" },
+    { key: "TODO", label: "ToDo" },
     { key: "PENDING", label: "Pending" },
     { key: "IN_PROGRESS", label: "In Progress" },
     { key: "REVIEW", label: "Review" },
@@ -169,12 +168,12 @@ const TaskDetails = () => {
                 } elseChildren={
                   <Dropdown menu={{ items, onClick: changeStatus }} trigger={['click']}>
                     <Button loading={statusLoading} >
-                      <a onClick={e => e.preventDefault()}>
+                      {/* <a onClick={e => e.preventDefault()}> */}
                         <Space color={TASK_STATUS_COLORS[taskDetails?.status?.toLowerCase()] || 'default'}>
                           {getLabelByKey(taskDetails?.status)}
                           <DownOutlined />
                         </Space>
-                      </a>
+                      {/* </a> */}
                     </Button>
                   </Dropdown>} />
 

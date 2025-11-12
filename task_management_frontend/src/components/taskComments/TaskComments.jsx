@@ -8,7 +8,6 @@ import { getComments, addComments } from "../../store/actions/Task.action";
 import { renderDate, renderTime } from "../../utils/Methods";
 import TaskHistory from "../taskHistory/TaskHistory";
 
-
 const TaskComments = () => {
     const dispatch = useDispatch();
 
@@ -28,7 +27,7 @@ const TaskComments = () => {
     const defaultOptions = ["Comments", "History"];
 
     const [newComment, setNewComment] = useState("");
-    const [activeTab, setActiveTab] = useState("Comments"); 
+    const [activeTab, setActiveTab] = useState("Comments");
 
     useEffect(() => {
         if (taskId) {
@@ -53,12 +52,6 @@ const TaskComments = () => {
         dispatch(addComments(payload, addCommentCallBack));
     };
 
-    const handleKeyDown = (e) => {
-        if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault();
-            handleAddComment();
-        }
-    };
 
     return (
         <div className="taskComment-parent">
@@ -122,9 +115,9 @@ const TaskComments = () => {
                                     placeholder="Type a comment"
                                     maxLength={250}
                                     value={newComment}
+                                    autoSize={{ minRows: 4, maxRows: 6 }}
                                     onChange={(e) => setNewComment(e.target.value)}
                                     rows={4}
-                                    onKeyDown={handleKeyDown}
                                 />
                             </div>
                             <div className="taskComment-btn">

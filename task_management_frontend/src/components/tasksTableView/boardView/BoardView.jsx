@@ -16,7 +16,7 @@ const BoardView = ({ data = [], loading }) => {
     acc[status].push(task);
     return acc;
   }, {});
-  
+
   const sections = [
     { heading: 'To Do', keys: ['PENDING', 'IN_PROGRESS', 'TODO'] },
     { heading: 'Review', keys: ['REVIEW'] },

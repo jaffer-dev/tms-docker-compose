@@ -63,22 +63,24 @@ const CreateLeaveRequest = ({ open, close }) => {
                             <AntForm layout="vertical" className="create-team-form" onFinish={handleSubmit}>
                                 <Row gutter={16}>
                                     <Col xs={24} md={24}>
-                                        <CSelect
-                                            label="Category"
-                                            name="category"
-                                            placeholder="Select category"
-                                            onChange={(value) => setFieldValue("category", value)}
-                                            onBlur={handleBlur}
-                                            value={values.category || undefined}
-                                            data={[
-                                                { key: "ANNUAL", label: "ANNUAL" },
-                                                { key: "CASUAL", label: "CASUAL" },
-                                                { key: "SICK", label: "SICK" },
-                                                { key: "WFH", label: "Work From Home" },
-                                            ]}
-                                            error={submitCount ? errors.category : touched.category && errors.category}
-                                        >
-                                        </CSelect>
+                                        <AntForm.Item>
+                                            <CSelect
+                                                label="Category"
+                                                name="category"
+                                                placeholder="Select category"
+                                                onChange={(value) => setFieldValue("category", value)}
+                                                onBlur={handleBlur}
+                                                value={values.category || undefined}
+                                                data={[
+                                                    { key: "ANNUAL", label: "ANNUAL" },
+                                                    { key: "CASUAL", label: "CASUAL" },
+                                                    { key: "SICK", label: "SICK" },
+                                                    { key: "WFH", label: "Work From Home" },
+                                                ]}
+                                                error={submitCount ? errors.category : touched.category && errors.category}
+                                            >
+                                            </CSelect>
+                                        </AntForm.Item>
                                     </Col>
                                 </Row>
                                 <Row gutter={16}>
@@ -104,6 +106,8 @@ const CreateLeaveRequest = ({ open, close }) => {
                                         </AntForm.Item>
                                     </Col>
 
+                                </Row>
+                                <Row gutter={16}>
                                     <Col xs={24} md={24}>
                                         <AntForm.Item
                                             label={<span className="form-label">To Date</span>}
@@ -146,7 +150,8 @@ const CreateLeaveRequest = ({ open, close }) => {
                                             />
                                         </AntForm.Item>
                                     </Col>
-
+                                </Row>
+                                <Row gutter={16}>
                                     <Col xs={24} md={24}>
                                         <AntForm.Item
                                             label={<span className="form-label">Upload File</span>}
@@ -156,6 +161,7 @@ const CreateLeaveRequest = ({ open, close }) => {
                                             ) : null}
                                         >
                                             <Upload.Dragger
+                                                // multiple
                                                 beforeUpload={(file) => {
                                                     const isLt5M = file.size / 1024 / 1024 < 5;
                                                     if (!isLt5M) {

@@ -5,6 +5,8 @@ const initialState = {
 
     leaveApprovalData: [],
     leaveApprovalLoading: false,
+
+    handleApprovalLoading: false,
 };
 
 export default (state = initialState, action = {}) => {
@@ -19,6 +21,11 @@ export default (state = initialState, action = {}) => {
                 ...state,
                 leaveApprovalData: action.data,
                 leaveApprovalLoading: action.loading,
+            };
+        case LEAVES.CONFIRM_APPROVAL:
+            return {
+                ...state,
+                handleApprovalLoading: action.loading,
             };
         default:
             return state;

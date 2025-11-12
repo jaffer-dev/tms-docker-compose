@@ -78,15 +78,15 @@
     margin-top: 4px;
 }
 
-.table-view-card:where(.css-dev-only-do-not-override-16dneet).ant-card {
+.table-view-card.ant-card {
     height: 510px !important;
 }
-:where(.css-dev-only-do-not-override-16dneet).ant-card .ant-card-body{
+.ant-card .ant-card-body{
     padding: 16px;
     width: 100%;
 }
 
-:where(.css-dev-only-do-not-override-16dneet).ant-empty {
+.ant-empty {
     height: 100%;
     display: flex;
     justify-content: center;

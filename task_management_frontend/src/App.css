@@ -159,25 +159,25 @@ span {
 }
 
 
-.ant-select-focused:where(.css-dev-only-do-not-override-16dneet).ant-select-outlined.ant-select-status-error:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer) .ant-select-selector {
+.ant-select-focused .ant-select-outlined.ant-select-status-error:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer) .ant-select-selector {
   border: none !important;
   box-shadow: none !important;
 }
 
-:where(.css-dev-only-do-not-override-16dneet).ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
+.ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
   border: none !important;
 }
 
-.ant-select-focused:where(.css-dev-only-do-not-override-16dneet).ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer) .ant-select-selector {
+.ant-select-focused.ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer) .ant-select-selector {
   box-shadow: none !important;
 }
 
-:where(.css-dev-only-do-not-override-16dneet).ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
-:where(.css-dev-only-do-not-override-16dneet).ant-tabs .ant-tabs-tab-btn {
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
+.ant-tabs .ant-tabs-tab-btn {
   font-family: var(--instrument);
 }
 
-:where(.css-dev-only-do-not-override-16dneet).ant-form-vertical .ant-form-item:not(.ant-form-item-horizontal) .ant-form-item-label {
+.ant-form-vertical .ant-form-item:not(.ant-form-item-horizontal) .ant-form-item-label {
   padding-bottom: 0px;
 }
 
@@ -191,9 +191,7 @@ span {
 }
 
 
-@media (min-width: 320px) and (max-width: 767px) {
-
-  /* dashboard  */
+/* @media (min-width: 320px) and (max-width: 767px) {
 
   .dashboard-container {
     padding: 25px 20px !important;
@@ -207,7 +205,7 @@ span {
     display: none;
   }
 
-  :where(.css-dev-only-do-not-override-16dneet).ant-btn.ant-btn-round.ant-btn-lg {
+  .ant-btn.ant-btn-round.ant-btn-lg {
     padding-inline-start: 12px;
     padding-inline-end: 12px;
   }
@@ -246,7 +244,7 @@ span {
     flex-direction: column !important;
   }
 
-  :where(.css-dev-only-do-not-override-16dneet).ant-segmented .ant-segmented-item-label {
+  .ant-segmented .ant-segmented-item-label {
     padding: 5px 18px !important;
   }
 
@@ -261,7 +259,6 @@ span {
   }
 
   .header-wrapper-container {
-    /* display: block !important; */
     padding: 0px !important;
     border: none !important;
     background: none !important;
@@ -275,28 +272,40 @@ span {
 
   .header-wrapper-right {}
 
-  :where(.css-dev-only-do-not-override-16dneet).ant-btn {
+  .ant-btn {
     padding: 0px 12px !important
   }
-
-  /* create task  */
-
-  /* task history  */
 
   .description-history-wrapper {
     padding-block: 20px !important;
   }
 
-  :where(.css-dev-only-do-not-override-16dneet).ant-card .ant-card-body {
+  .ant-card .ant-card-body {
     padding: 5px !important;
   }
 
   .taskDescription-reassign {
     display: block !important;
   }
-}
+} */
 
-css-dev-only-do-not-override-16dneet ant-empty {
+ 
+/* @media (max-width: 768px) {
+  .responsive-task-table {
+    min-width: 600px;
+  }
+
+  .status-filter {
+    justify-content: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .status-filter .ant-select {
+    width: 100% !important;
+  }
+} */
+ 
+ .ant-empty {
   height: 400px !important;
   display: flex;
   align-items: center;
@@ -335,7 +344,7 @@ css-dev-only-do-not-override-16dneet ant-empty {
   justify-content: end;
   width: 200px;
 
-  :where(.css-dev-only-do-not-override-16dneet).ant-select .ant-select-selection-wrap {
+  .ant-select .ant-select-selection-wrap {
     /* border: 1px solid var(--them-stroke); */
     border-radius: 16px;
     padding: 0px 14px;
@@ -343,17 +352,3 @@ css-dev-only-do-not-override-16dneet ant-empty {
 
 }
 
-@media (max-width: 768px) {
-  .responsive-task-table {
-    min-width: 600px;
-  }
-
-  .status-filter {
-    justify-content: flex-start;
-    margin-bottom: 12px;
-  }
-
-  .status-filter .ant-select {
-    width: 100% !important;
-  }
-}
