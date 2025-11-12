@@ -1,0 +1,15 @@
+.comments-text {
+    border-top: 1px solid #f0f0f0;
+    padding: 12px 16px;
+    background: #fff;
+    display: flex;
+    gap: 8px;
+}
+
+.comments-text .ant-avatar {
+    height: 32px !important;
+    width: 50px !important;
+}
+.comments-textarea{
+    width: 100%;
+}

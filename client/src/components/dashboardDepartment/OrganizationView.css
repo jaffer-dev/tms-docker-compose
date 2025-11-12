@@ -1,0 +1,57 @@
+/* Outer segmented container */
+.ant-segmented {
+  border: 1px solid var(--them-stroke);
+  border-radius: 999px;
+  padding: 4px;
+  transition: all 0.3s ease;
+}
+
+.ant-segmented .ant-segmented-item-label {
+  padding: 6px 32px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.ant-segmented .ant-segmented-item-selected {
+  background-color: var(--them-primary);
+  color: var(--them-white);
+  border-radius: 999px;
+}
+
+
+.ant-segmented .ant-segmented-item:hover:not(.ant-segmented-item-selected):not(.ant-segmented-item-disabled)::after {
+  background: none !important;
+  background-color: none !important;
+}
+
+.ant-segmented .ant-segmented-item {
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  /* transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1); */
+  transform: translateZ(0);
+}
+
+
+
+.teams-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.teams-header-left {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-direction: row;
+}
+
+.teams-heading {
+  h3 {
+    font-size: 22px;
+    font-weight: 600;
+    font-family: var(--instrument);
+  }
+}

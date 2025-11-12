@@ -1,0 +1,25 @@
+/* @media (min-width: 320px) and (max-width: 767px) {
+    .ant-layout-header {
+        line-height: 16px !important;
+    }
+
+    .page-header-left h3 {
+        font-size: 14px;
+    }
+
+    .dashboard-container {
+        padding: 16px;
+    }
+
+    .header-title-name h3 {
+        font-size: 16px;
+    }
+
+    .btn-text {
+        display: none;
+    }
+
+    .ant-btn.ant-btn-round.ant-btn-lg:not(.ant-btn-icon-only) {
+        padding-inline: 12px;
+    }
+} */

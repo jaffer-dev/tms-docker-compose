@@ -1,0 +1,119 @@
+.dashboard-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--them-white);
+  padding: 32px;
+  /* padding-left: 100px; */
+  position: relative;
+  overflow: hidden;
+  color: var(--them-black);
+}
+
+.dashboard-teams-section {
+  padding-top: 50px;
+}
+
+.dashboard-wrapper {
+  border-radius: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  /* gap: 24px; */
+  flex-wrap: wrap;
+}
+
+.dashboard-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.header-title-name h6 {
+  font-size: 14px;
+  font-weight: 400;
+  color: #777;
+}
+
+.header-title-name h6 span {
+  color: var(--them-primary);
+  font-weight: 600;
+}
+
+.header-title-name h3 {
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--them-black);
+  margin-top: 4px;
+  font-family: var(--instrument);
+}
+
+.dashboard-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: var(--them-gradient);
+  z-index: 0;
+}
+
+
+.error-boundary-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #f5f7fa;
+  padding: 20px;
+}
+
+.error-boundary-card {
+  background: #fff;
+  padding: 32px 40px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.error-boundary-icon {
+  font-size: 48px;
+  color: #ff4d4f;
+  margin-bottom: 15px;
+}
+
+.notification-container {
+  background: white;
+  padding: 8px 10px;
+  border-radius: 50px;
+  /* border: 2px dotted var(--them-primary); */
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.88)
+}
+
+.notification-icon {
+  /* font-size: 40px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--them-black);
+}
+
+.notification-container:hover .notification-icon {
+  color: var(--them-primary); 
+}
+
+.notification-container:hover {
+  border-color: var(--them-primary);
+}

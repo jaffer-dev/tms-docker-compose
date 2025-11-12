@@ -1,0 +1,32 @@
+.icons-main {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Instrument Sans";
+    font-weight: 400;
+}
+
+.select-dropdown-main {
+    /* margin-bottom: 24px; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.select-dropdown {
+    width: 100%;    
+    font-weight: 500;
+    border: 1px solid var(--them-stroke) !important;
+    height: 42px !important;
+    border-radius: 32px !important;
+    padding: 6px 16px !important;
+    background: var(--them-white);
+}
+
+.select-dropdown-main {
+   & .ant-select{
+        .ant-select-selector{
+            border : none !important;
+        }
+    }
+}

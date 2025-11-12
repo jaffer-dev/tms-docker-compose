@@ -1,0 +1,10 @@
+const LEAVES = {
+    APPLY_LEAVE: 'APPLY_LEAVE',
+    
+    LEAVE_APPROVAL: 'LEAVE_APPROVAL',
+
+    HANDLE_APPROVAL: 'HANDLE_APPROVAL',
+
+};
+
+export default LEAVES;

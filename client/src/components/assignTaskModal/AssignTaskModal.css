@@ -1,0 +1,101 @@
+.assign-task-wrapper{
+  padding-block: 32px;
+}
+
+.assign-task-modal .ant-modal-content {
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 0;
+  }
+  
+  .assign-task-header {
+    color: var(--them-black);
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .form-subtitle {
+    color: var(--them-black);
+    font-size: 14px;
+    margin-top: 6px;
+    font-family: var(--instrument);
+
+  }
+  
+  .assign-task-body {
+    padding: 16px;
+    max-height: 320px;
+    overflow-y: auto;
+  }
+  
+  .member-list {
+    margin: 0;
+  }
+  
+  .member-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    border: 1px solid #f0f0f0;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    background: #fff;
+  }
+  
+  .member-card:hover {
+    border-color: #1677ff;
+    background: #fafcff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .member-card.selected {
+    border: 1px solid #1677ff;
+    background: #f0f7ff;
+  }
+  
+  .member-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .member-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .member-name {
+    font-weight: 600;
+    font-size: 15px;
+    color: #333;
+  }
+  
+  .role-tag {
+    margin-top: 2px;
+    font-size: 12px;
+  }
+  
+  .assign-task-body .ant-list .ant-list-items .ant-list-item{
+    padding: 12px;
+  }
+
+  .ant-modal .ant-modal-footer{
+    margin: 0;
+  }
+
+  .assign-task-wrapper .form-actions{
+    padding: 16px 16px 0 16px; 
+  }
+
+  .ant-list-split .ant-list-item:last-child{
+    border-block-end: 1px solid rgba(5, 5, 5, 0.06);
+  }
+  .ant-list-split .ant-list-item:last-child:hover{
+    border-block-end: 1px solid var(--them-primary)
+  }
+  .ant-tag.ant-tag-blue{
+    width: max-content;
+  }
