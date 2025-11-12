@@ -120,7 +120,6 @@ const Members = () => {
     const pageHeaderProps = {
         isAddMember: isAddMember,
         setIsAddMember: setIsAddMember,
-        // renderBack: true,
         title: "Members",
         renderAddMemberButton: true,
         onMemberAdded: () => setRefresh(!refresh),

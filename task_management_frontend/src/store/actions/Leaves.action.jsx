@@ -1,5 +1,5 @@
 import LEAVES from "../constant/Leaves.Constant"
-import { get, post } from '../../utils/ApiMethods';
+import { get, post, put } from '../../utils/ApiMethods';
 import { handleError, handleSuccess } from '../../utils/Methods';
 
 
@@ -23,11 +23,28 @@ export const leaveApprovals = (payload, CB) => async (dispatch) => {
   const dispatchType = LEAVES.LEAVE_APPROVAL
   dispatch({ type: dispatchType, loading: true, data: [] });
   try {
-    const { data } = await get('/leaves/approvals', payload);
+    const { data } = await get('/leaves/get-all-approvals', payload);
     if (!data.error) {
       dispatch({ type: dispatchType, loading: false, data: data?.leaves || [] });
+      handleSuccess(data?.message);
     }
     console.info(data, "data")
+  } catch (error) {
+    dispatch({ type: dispatchType, loading: false, data: [] });
+    handleError(error.response.data.message || error.message);
+  }
+};
+
+export const handleApproval = (leaveId, payload, CB) => async (dispatch) => {
+  const dispatchType = LEAVES.HANDLE_APPROVAL
+  dispatch({ type: dispatchType, loading: true, data: [] });
+  try {
+    const { data } = await put(`/leaves/${leaveId}/status`, payload);
+    if (!data.error) {
+      dispatch({ type: dispatchType, loading: false, data: data?.leaves || [] });
+      handleSuccess(data?.message);
+      CB && CB()
+    }
   } catch (error) {
     dispatch({ type: dispatchType, loading: false, data: [] });
     handleError(error.response.data.message || error.message);

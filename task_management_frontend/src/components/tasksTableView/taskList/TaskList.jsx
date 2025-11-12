@@ -53,7 +53,7 @@ const Tasklist = ({ data: taskList, loading: taskListLoading, userId }) => {
             render: (obj, _) => assignTo(obj, _)
         },
         {
-            title: 'status',
+            title: 'Status',
             dataIndex: 'status',
             render: (taskStatus) => (
                 <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

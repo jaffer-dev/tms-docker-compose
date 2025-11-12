@@ -57,7 +57,7 @@
   padding: 1px;
 }
 
-.sidebar-profile-icon:where(.css-dev-only-do-not-override-16dneet).ant-avatar {
+.sidebar-profile-icon.ant-avatar {
   width: 32px;
   height: 32px;
 }
@@ -75,7 +75,7 @@
 
 /* Ant Avatar fix */
 .sidebar-profile-icon {
-  :where(.css-dev-only-do-not-override-16dneet).ant-avatar {
+  .ant-avatar {
     font-size: 12px !important;
     width: 32px !important;
     height: 32px;

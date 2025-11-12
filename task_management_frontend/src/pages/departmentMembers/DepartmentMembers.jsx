@@ -150,7 +150,6 @@ const DepartmentDetails = () => {
   const pageHeaderProps = {
     setIsOpenAddModal: setIsOpenAddModal,
     isOpenAddModal: isOpenAddModal,
-    // renderBack: true,
     title: department.title,
     subtitle: department?.description,
     departmentId: department?._id,

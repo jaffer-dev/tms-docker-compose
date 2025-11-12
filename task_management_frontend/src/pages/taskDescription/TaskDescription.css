@@ -1,11 +1,11 @@
 .description-history-wrapper {
-    padding-block: 50px;
+    padding-block: 48px;
     background: white;
 }
 
 .description-history-card {
     /* max-width: 1100px; */
-    margin: 0 34px;
+    margin: 0 32px;
 }
 
 .description-header {
@@ -142,7 +142,7 @@
   align-items: center;
   justify-content: space-between;
   background: #f5f9ff;
-  padding: 10px 16px;
+  padding: 8px 16px;
   border-radius: 8px;
   margin-bottom: 8px;
   border: 1px solid #d6e4ff;
@@ -207,7 +207,7 @@
 }
 
 .timeline-content {
-  padding: 10px 15px;
+  padding: 8px 16px;
   background-color: #fafafa;
   border-radius: 4px;
   border-left: 2px solid #e8e8e8;
@@ -291,7 +291,7 @@
 
 
 .history-section {
-  :where(.css-dev-only-do-not-override-16dneet).ant-steps .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title {
+  .ant-steps .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title {
     width: 100% !important;
   }
 }
@@ -304,12 +304,12 @@
 
 .history-section {
 
-  :where(.css-dev-only-do-not-override-16dneet).ant-upload-wrapper .ant-upload-drag {
+  .ant-upload-wrapper .ant-upload-drag {
     background: #f5f9ff37;
     height: 185px;
   }
 
-  :where(.css-dev-only-do-not-override-16dneet).ant-upload-wrapper .ant-upload-drag {
+  .ant-upload-wrapper .ant-upload-drag {
     border: 2px dashed #188fff3f !important;
   }
 
@@ -326,7 +326,7 @@
 }
 
 
-:where(.css-dev-only-do-not-override-16dneet).ant-descriptions{
+.ant-descriptions{
   min-width: 50%;
 }
 

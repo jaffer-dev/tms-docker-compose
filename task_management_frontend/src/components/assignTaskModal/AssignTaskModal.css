@@ -1,12 +1,17 @@
+.assign-task-wrapper{
+  padding-block: 32px;
+}
+
 .assign-task-modal .ant-modal-content {
     border-radius: 12px;
     overflow: hidden;
+    padding: 0;
   }
   
   .assign-task-header {
     color: var(--them-black);
     text-align: center;
-    padding: 20px 16px;
+    margin-bottom: 24px;
   }
 
   .form-subtitle {
@@ -18,7 +23,7 @@
   }
   
   .assign-task-body {
-    padding: 20px;
+    padding: 16px;
     max-height: 320px;
     overflow-y: auto;
   }
@@ -73,6 +78,24 @@
     font-size: 12px;
   }
   
-  :where(.css-dev-only-do-not-override-16dneet).ant-list .ant-list-item{
+  .assign-task-body .ant-list .ant-list-items .ant-list-item{
     padding: 12px;
+  }
+
+  .ant-modal .ant-modal-footer{
+    margin: 0;
+  }
+
+  .assign-task-wrapper .form-actions{
+    padding: 16px 16px 0 16px; 
+  }
+
+  .ant-list-split .ant-list-item:last-child{
+    border-block-end: 1px solid rgba(5, 5, 5, 0.06);
+  }
+  .ant-list-split .ant-list-item:last-child:hover{
+    border-block-end: 1px solid var(--them-primary)
+  }
+  .ant-tag.ant-tag-blue{
+    width: max-content;
   }

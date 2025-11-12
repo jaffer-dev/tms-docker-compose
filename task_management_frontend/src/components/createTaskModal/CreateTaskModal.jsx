@@ -128,16 +128,19 @@ const CreateTaskModal = ({ isOpenAddModal, setIsOpenAddModal }) => {
 
                         return (
                             <Form layout="vertical" form={form} onFinish={handleSubmit}>
-                                <CInput
-                                    label="Title"
-                                    name="title"
-                                    placeHolder="Enter task title"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.title}
-                                    error={submitCount ? errors.title : touched.title && errors.title}
-                                />
-
+                                <Row gutter={16}>
+                                    <Col xs={24}>
+                                        <CInput
+                                            label="Title"
+                                            name="title"
+                                            placeHolder="Enter task title"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.title}
+                                            error={submitCount ? errors.title : touched.title && errors.title}
+                                        />
+                                    </Col>
+                                </Row>
                                 <Divider size="small" />
 
                                 {/* Description */}
@@ -164,30 +167,31 @@ const CreateTaskModal = ({ isOpenAddModal, setIsOpenAddModal }) => {
 
                                 <Divider size="small" />
 
-                                {/* Department Selection (for HOD only) */}
-                                {userRole === "HOD" && (
-                                    <Row gutter={16}>
-                                        <Col xs={24}>
-                                            <CSelect
-                                                label="Select Department"
-                                                name="assignToDepartment"
-                                                placeholder="Select Department"
-                                                onChange={(value) => {
-                                                    setFieldValue("assignToDepartment", value);
-                                                    setFieldValue("assignee", "");
-                                                }}
-                                                onBlur={handleBlur}
-                                                value={values.assignToDepartment || ""}
-                                                data={[
-                                                    { key: "ownDepartment", label: "Own Department" },
-                                                    { key: "otherDepartment", label: "Other Departments" },
-                                                ]}
-                                                error={submitCount ? errors.assignToDepartment : touched.assignToDepartment && errors.assignToDepartment}
-                                            >
-                                            </CSelect>
-                                        </Col>
-                                    </Row>
-                                )}
+                                {
+                                    userRole === "HOD" && (
+                                        <Row gutter={16} style={{ marginBottom: 16 }}>
+                                            <Col xs={24}>
+                                                <CSelect
+                                                    label="Select Department"
+                                                    name="assignToDepartment"
+                                                    placeholder="Select Department"
+                                                    onChange={(value) => {
+                                                        setFieldValue("assignToDepartment", value);
+                                                        setFieldValue("assignee", "");
+                                                    }}
+                                                    onBlur={handleBlur}
+                                                    value={values.assignToDepartment || undefined}
+                                                    data={[
+                                                        { key: "ownDepartment", label: "Own Department" },
+                                                        { key: "otherDepartment", label: "Other Departments" },
+                                                    ]}
+                                                    error={submitCount ? errors.assignToDepartment : touched.assignToDepartment && errors.assignToDepartment}
+                                                >
+                                                </CSelect>
+                                            </Col>
+                                        </Row>
+                                    )
+                                }
 
                                 <Row gutter={16}>
                                     {/* Type */}
@@ -196,9 +200,9 @@ const CreateTaskModal = ({ isOpenAddModal, setIsOpenAddModal }) => {
                                             label="Type"
                                             name="type"
                                             placeholder="Select role"
-                                            value={values.type || undefined}
                                             onChange={(value) => setFieldValue("type", value)}
                                             onBlur={handleBlur}
+                                            value={values.type || undefined}
                                             data={[
                                                 { key: "MEMO", label: "Memo" },
                                                 { key: "TASK", label: "Task" },
@@ -270,9 +274,10 @@ const CreateTaskModal = ({ isOpenAddModal, setIsOpenAddModal }) => {
                                 </Row>
 
                                 {/* Priority + Deadline (not for MEMO) */}
-                                {values.type !== "MEMO" && (
-                                    <Row gutter={16}>
-                                        <Col xs={24} md={12}>
+                                {
+                                    values.type !== "MEMO" && (
+                                        <Row gutter={16}>
+                                            <Col xs={24} md={12}>
                                                 <CSelect
                                                     label="Priority"
                                                     name="priority"
@@ -288,31 +293,32 @@ const CreateTaskModal = ({ isOpenAddModal, setIsOpenAddModal }) => {
                                                     error={submitCount ? errors.priority : touched.priority && errors.priority}
                                                 >
                                                 </CSelect>
-                                        </Col>
+                                            </Col>
 
-                                        <Col xs={24} md={12}>
-                                            <AntForm.Item
-                                                label={<span className="form-label">Deadline</span>}
-                                                validateStatus={touched.deadline && errors.deadline ? "error" : ""}
-                                                help={touched.deadline && errors.deadline ? (
-                                                    <span className="error-message">{errors.deadline}</span>
-                                                ) : null}
-                                            >
-                                                <DatePicker
-                                                    name="deadline"
-                                                    onChange={(value) => setFieldValue("deadline", value)}
-                                                    onBlur={handleBlur}
-                                                    value={values.deadline || null}
-                                                    placeholder="MM/DD/YYYY"
-                                                    className="form-input"
-                                                    disabledDate={(current) =>
-                                                        current && current < new Date().setHours(0, 0, 0, 0)
-                                                    }
-                                                />
-                                            </AntForm.Item>
-                                        </Col>
-                                    </Row>
-                                )}
+                                            <Col xs={24} md={12}>
+                                                <AntForm.Item
+                                                    label={<span className="form-label">Deadline</span>}
+                                                    validateStatus={touched.deadline && errors.deadline ? "error" : ""}
+                                                    help={touched.deadline && errors.deadline ? (
+                                                        <span className="error-message">{errors.deadline}</span>
+                                                    ) : null}
+                                                >
+                                                    <DatePicker
+                                                        name="deadline"
+                                                        onChange={(value) => setFieldValue("deadline", value)}
+                                                        onBlur={handleBlur}
+                                                        value={values.deadline || null}
+                                                        placeholder="MM/DD/YYYY"
+                                                        className="form-input"
+                                                        disabledDate={(current) =>
+                                                            current && current < new Date().setHours(0, 0, 0, 0)
+                                                        }
+                                                    />
+                                                </AntForm.Item>
+                                            </Col>
+                                        </Row>
+                                    )
+                                }
 
                                 <div className="form-actions">
                                     <Button
@@ -330,7 +336,7 @@ const CreateTaskModal = ({ isOpenAddModal, setIsOpenAddModal }) => {
                     }}
                 </Formik>
             </div>
-        </Modal>
+        </Modal >
     );
 };
 

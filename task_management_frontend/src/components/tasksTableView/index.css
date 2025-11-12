@@ -5,7 +5,7 @@
 .tasks-table-view-header{
     /* width: 100%; */
     display: flex;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     align-items: center;
     justify-content: space-between;
 
@@ -14,15 +14,15 @@
         /* width: 100%; */
         flex: 1;
 
-        :where(.css-dev-only-do-not-override-16dneet).ant-input-group-wrapper{
+        .ant-input-group-wrapper{
             width: 80%;
         }
 
-        :where(.css-dev-only-do-not-override-16dneet).ant-input-group-wrapper-outlined .ant-input-group-addon:first-child {
+        .ant-input-group-wrapper-outlined .ant-input-group-addon:first-child {
             height: 40px;
             
         }
-        :where(.css-dev-only-do-not-override-16dneet).ant-input-group >.ant-input:last-child, :where(.css-dev-only-do-not-override-16dneet).ant-input-group .ant-input-group-addon:last-child{
+        .ant-input-group >.ant-input:last-child, .ant-input-group .ant-input-group-addon:last-child{
             height: 40px;
             border-start-end-radius: 8px;
             border-end-end-radius: 8px;
@@ -30,12 +30,12 @@
             border: 1px solid var(--them-stroke);
         }
 
-        :where(.css-dev-only-do-not-override-16dneet).ant-input-group-wrapper-outlined .ant-input-group-addon{
+        .ant-input-group-wrapper-outlined .ant-input-group-addon{
             background: none;
             border: 1px solid var(--them-stroke);
         }
 
-        :where(.css-dev-only-do-not-override-16dneet).ant-input-group >.ant-input:first-child, :where(.css-dev-only-do-not-override-16dneet).ant-input-group .ant-input-group-addon:first-child{
+        .ant-input-group >.ant-input:first-child, .ant-input-group .ant-input-group-addon:first-child{
             border-start-end-radius: 0;
             border-end-end-radius: 0;
 

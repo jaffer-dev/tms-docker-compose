@@ -116,18 +116,18 @@
   border: 1px solid var(--them-stroke);
 }
 
-:where(.css-16dneet).ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
+.ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
   border: none;
 }
 
 
-:where(.css-dev-only-do-not-override-16dneet).ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
+.ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
   border: none !important;
   padding: 0 !important;
 }
 
-.ant-select-focused:where(.css-dev-only-do-not-override-16dneet).ant-select-outlined.ant-select-status-error:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer) .ant-select-selector,
-.ant-select-focused:where(.css-dev-only-do-not-override-16dneet).ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer) .ant-select-selector {
+.ant-select-focused.ant-select-outlined.ant-select-status-error:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer) .ant-select-selector,
+.ant-select-focused.ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer) .ant-select-selector {
   border-color: none !important;
   box-shadow: none;
 }

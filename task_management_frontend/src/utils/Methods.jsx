@@ -214,7 +214,6 @@ export const formatCountsArray = (stats, type) => {
       { status: "Casual Leaves", count: stats?.casual || 0 },
       { status: "Sick Leaves", count: stats?.sick || 0 },
       { status: "Taken Leaves", count: stats?.taken?.length || 0 },
-      // { status: "Remaining", count: stats?.remaining?.length || 0 },
     ];
   }
 };

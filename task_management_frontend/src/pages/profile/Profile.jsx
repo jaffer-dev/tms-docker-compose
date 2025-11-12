@@ -51,7 +51,7 @@ const Profile = () => {
                                     <UserAvatar name={user.username} />
                                 </div>
                                 <div className="profile-card-detail">
-                                    <h3>{user.username}</h3>
+                                    <h3>{user.personalDetails.fullName}</h3>
                                     <p>{readableText(user.role)}</p>
                                     <h4><SlEnvolope />{user.email}</h4>
                                 </div>
