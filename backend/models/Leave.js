@@ -4,10 +4,10 @@ const leaveSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   category: { type: String, enum: ['ANNUAL','CASUAL','SICK','WFH'], required: true },
   fromDate: { type: Date, required: true },
-  toDate: { type: Date, required: true },
+  toDate: { type: Date, required: false },
   days: { type: Number, required: true }, // computed
   reason: String,
-  status: { type: String, enum: ['PENDING','APPROVED','REJECTED','CANCELLED'], default: 'PENDING' },
+  status: { type: String, enum: ['PENDING','APPROVED','REJECTED','CANCELLED', 'PENDING_HOD'], default: 'PENDING' },
   requestedAt: { type: Date, default: Date.now },
   approvedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   approvedAt: Date,

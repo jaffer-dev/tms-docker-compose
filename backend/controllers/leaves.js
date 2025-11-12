@@ -1,10 +1,14 @@
-const { startOfWeek, endOfWeek, differenceInCalendarDays } = require('date-fns');
 const Leave = require('../models/Leave');
+const date_fns = require('date-fns');
 const LeaveBalance = require('../models/LeaveBalance');
 const User = require('../models/User');
 const { inclusiveDays } = require('../utils/date');
+const { default: mongoose } = require('mongoose');
+const UserPersonalDetails = require('../models/UserPersonalDetails');
+const { LEAVE_TYPE_CONSTANTS } = require('../utils/constants');
 
 const WFH_CUTOFF_HOUR = 11; // 11:00 PM server time
+const { startOfWeek, endOfWeek, differenceInCalendarDays } = date_fns
 
 
 exports.applyLeave = async (req, res) => {
@@ -41,7 +45,7 @@ exports.applyLeave = async (req, res) => {
       // ⛔ Throw error if more than 1 day selected
       if (days > 1) {
         return res.status(400).json({
-          error: true,   message: `${category} leave can only be applied for one day.`,
+          error: true, message: `${category} leave can only be applied for one day.`,
         });
       }
 
@@ -59,7 +63,7 @@ exports.applyLeave = async (req, res) => {
     });
 
     if (overlap) {
-      return res.status(400).json({  error: true,  message: 'Overlapping leave already exists.' });
+      return res.status(400).json({ error: true, message: 'Overlapping leave already exists.' });
     }
 
     // ---------------------------------------------------
@@ -85,6 +89,7 @@ exports.applyLeave = async (req, res) => {
         userId,
         category: 'WFH',
         fromDate: { $gte: weekStart, $lte: weekEnd },
+        status: { $in: ['APPROVED'] },
       });
 
       if (existingWFH) {
@@ -113,7 +118,7 @@ exports.applyLeave = async (req, res) => {
       const existingCasual = await Leave.findOne({
         userId,
         category: 'CASUAL',
-        status: { $in: ['PENDING_HOD', 'PENDING_SUPER_ADMIN', 'PENDING_HR', 'APPROVED'] },
+        status: { $in: ['APPROVED'] },
       });
 
       if (existingCasual) {
@@ -269,7 +274,7 @@ exports.updateLeaveStatus = async (req, res) => {
         remarks, // ✅ Save remarks
       };
       leave.status = status === 'APPROVED' ? 'PENDING_HR' : 'REJECTED';
-    } 
+    }
     else if (approver.role === 'SUPER_ADMIN') {
       // SUPER_ADMIN approval
       leave.superAdminApproval = {
@@ -279,7 +284,7 @@ exports.updateLeaveStatus = async (req, res) => {
         remarks, // ✅ Save remarks
       };
       leave.status = status === 'APPROVED' ? 'PENDING_HR' : 'REJECTED';
-    } 
+    }
     else if (['SUB_ADMIN', 'HR', 'MANAGER'].includes(approver.role)) {
       // HR / SUB_ADMIN / MANAGER final approval
       leave.hrApproval = {
@@ -308,7 +313,7 @@ exports.updateLeaveStatus = async (req, res) => {
         balance.lastUpdated = new Date();
         await balance.save();
       }
-    } 
+    }
     else {
       return res.status(403).json({ message: 'Not authorized to approve this leave.' });
     }
@@ -340,7 +345,7 @@ exports.fetchApprovals = async (req, res) => {
     // ----------------------------
     switch (role) {
       case 'EMPLOYEE':
-      // case 'MEMBER':
+        // case 'MEMBER':
         // Show only user's own leaves
         filter = { userId: user._id };
         break;
@@ -430,5 +435,83 @@ exports.fetchApprovals = async (req, res) => {
   } catch (err) {
     console.error('Error fetching approvals:', err);
     return res.status(500).json({ message: err.message });
+  }
+};
+
+
+exports.applyLeaveReq = async (req, res) => {
+  try {
+    const { id: userId } = req.user;
+    const { category, fromDate, toDate, reason, fileMeta } = req.body;
+
+    const user = await UserPersonalDetails.findOne({ userId })
+      .select("dateOfJoining fullName designation");
+
+    if (!user)
+      return res.status(404).json({ error: true, message: "User personal details not found" });
+
+    const today = new Date();
+    const probationEndDate = new Date(user.dateOfJoining);
+    probationEndDate.setMonth(probationEndDate.getMonth() + 3);
+
+    const start = new Date(fromDate);
+    const end = new Date(toDate || fromDate);
+    const days = differenceInCalendarDays(end, start) + 1;
+
+    const weekStart = startOfWeek(start, { weekStartsOn: 0 });
+    const weekEnd = endOfWeek(start, { weekStartsOn: 0 });
+
+    let initialStatus = 'PENDING_HOD';
+
+    // check probation
+    if (today < probationEndDate)
+      return res.status(403).json({ error: true, message: `You're not eligible for ${category}` });
+
+    const existingWFH = await Leave.findOne({
+      userId,
+      category: 'WFH',
+      fromDate: { $gte: weekStart, $lte: weekEnd },
+      status: { $in: ['APPROVED'] },
+    });
+
+    if (existingWFH) {
+      return res.status(400).json({
+        error: true, message: 'Only one WFH is allowed per week (Sunday to Saturday).',
+      });
+    }
+
+    // validate single-day leave
+    if ([LEAVE_TYPE_CONSTANTS.WFH, LEAVE_TYPE_CONSTANTS.CASUAL].includes(category) && days > 1)
+      return res.status(400).json({ error: true, message: `${category} can only be applied for one day.` });
+
+    // special handling for WFH
+    if (category === LEAVE_TYPE_CONSTANTS.WFH && start.toDateString() === today.toDateString()) {
+      const cutoff = new Date();
+      cutoff.setHours(WFH_CUTOFF_HOUR, 0, 0, 0);
+      if (today > cutoff)
+        return res.status(400).json({ error: true, message: 'WFH for today must be applied before 11:00 AM.' });
+    }
+
+    const leave = await Leave.create({
+      userId,
+      category,
+      fromDate,
+      toDate ,
+      days,
+      reason,
+      status: initialStatus,
+      meta: fileMeta,
+    });
+
+    // future: handle other leave types if needed (CASUAL, SICK, ANNUAL)
+    return res.status(200).json({
+      error: false,
+      message: `Leave request for ${category} is valid.`,
+      details: { user, fromDate, toDate, reason }
+    });
+
+  } catch (error) {
+    console.error("applyLeaveReq error:", error);
+    return res.status(500).json({ error: true, message: error.message });
   }
 };
