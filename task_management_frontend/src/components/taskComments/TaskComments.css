@@ -55,13 +55,14 @@
     color: #888;
 }
 
-:where(.css-dev-only-do-not-override-16dneet).ant-list .ant-list-item .ant-list-item-meta .ant-list-item-meta-title {
+.ant-list .ant-list-item .ant-list-item-meta .ant-list-item-meta-title {
     margin-bottom: 0;
 }
 
 .taskComments-userName {
     font-size: 14px;
     font-weight: 700;
+    margin-bottom: 0;
 }
 
 
@@ -69,42 +70,43 @@
 .taskComments-message {
     color: var(--them-black);
     font-size: 15px;
+    margin-bottom: 0;
 }
 
-:where(.css-dev-only-do-not-override-16dneet).ant-segmented {
+.ant-segmented {
     border: 1px solid var(--them-stroke);
     border-radius: 999px;
     padding: 4px;
     transition: all 0.3s ease;
 }
 
-:where(.css-dev-only-do-not-override-16dneet).ant-segmented .ant-segmented-item-label {
+.ant-segmented .ant-segmented-item-label {
     padding: 6px 32px;
     font-size: 14px;
     font-weight: 500;
     transition: all 0.3s ease;
 }
 
-:where(.css-dev-only-do-not-override-16dneet).ant-segmented .ant-segmented-item-selected {
+.ant-segmented .ant-segmented-item-selected {
     background-color: var(--them-primary);
     color: var(--them-white);
     border-radius: 999px;
 }
 
 
-:where(.css-dev-only-do-not-override-16dneet).ant-segmented .ant-segmented-item:hover:not(.ant-segmented-item-selected):not(.ant-segmented-item-disabled)::after {
+.ant-segmented .ant-segmented-item:hover:not(.ant-segmented-item-selected):not(.ant-segmented-item-disabled)::after {
     background: none !important;
     background-color: none !important;
 }
 
-:where(.css-dev-only-do-not-override-16dneet).ant-segmented .ant-segmented-item {
+.ant-segmented .ant-segmented-item {
     position: relative;
     text-align: center;
     cursor: pointer;
     transform: translateZ(0);
 }
 
-.history-step-description :where(.css-dev-only-do-not-override-16dneet).ant-avatar{
+.history-step-description .ant-avatar{
     height: 22px;
     width: 22px;
 }

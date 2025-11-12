@@ -6,7 +6,7 @@
     gap: 8px;
 }
 
-.comments-text :where(.css-dev-only-do-not-override-16dneet).ant-avatar {
+.comments-text .ant-avatar {
     height: 32px !important;
     width: 50px !important;
 }

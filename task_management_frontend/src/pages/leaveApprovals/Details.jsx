@@ -1,18 +1,22 @@
-import { Badge, Button, Descriptions, Divider, Drawer, Flex, Popconfirm } from 'antd'
-import React from 'react'
+import { Button, Drawer, Flex, Input, Modal, Popconfirm } from 'antd'
+import React, { useState } from 'react'
 import './Details.css'
 import { renderAssigneeDetails, renderTaskDetails } from './Helper'
 import { useDispatch, useSelector } from 'react-redux'
-import { approvalAction, getApprovals } from '../../store/actions/Approvals.action'
+import { handleApproval, leaveApprovals } from '../../store/actions/Leaves.action'
 
 const Details = ({ isOpen, setIsOpen, selected }) => {
 
     const dispatch = useDispatch();
 
-    const { loading, userRole } = useSelector(({approvals, auth}) => ({
-        loading : approvals?.actionLoading,
-        userRole : auth?.user?.role
+    const { loading, userRole, leaveData } = useSelector(({ approvals, auth, leaves }) => ({
+        loading: approvals?.actionLoading,
+        userRole: auth?.user?.role,
+        leaveData: leaves?.leaveApprovalData
     }))
+
+    const [reasonModalOpen, setReasonModalOpen] = useState(false);
+    const [rejectReason, setRejectReason] = useState("");
 
     const onCancel = () => {
         setIsOpen(false)
@@ -20,63 +24,69 @@ const Details = ({ isOpen, setIsOpen, selected }) => {
 
     const callback = () => {
         setIsOpen(false)
-        dispatch(getApprovals())
+        dispatch(leaveApprovals())
     }
 
-    const onSubmit = (val) => {
-        let payload = {
-            action: val,
-            approvalId: selected?._id
-        }
-        dispatch(approvalAction(payload, callback))
-    }
+    const onSubmit = (status, remarks = "") => {
+        const leaveId = selected._id;
+
+        console.log(selected, "leaveId")
+
+        const payload = {
+            status,
+            remarks,
+        };
+        dispatch(handleApproval(leaveId, payload, callback));
+        setReasonModalOpen(false);
+        setRejectReason("");
+    };
+
 
     const footer = () => {
-        console.log(selected?.status === 'PENDING')
-        if (userRole !== 'EMPLOYEE' && selected?.status === 'PENDING'){
+        if (userRole !== 'EMPLOYEE' && selected?.status === 'PENDING') {
             return (
                 <Flex gap="small" style={{ width: "100%" }}>
-                    <Popconfirm
-                        title="Reject Task"
-                        description="Are you sure you want to reject this task?"
-                        okText="Yes"
-                        cancelText="No"
-                        onConfirm={() => onSubmit('REJECT')}
-                        onCancel={""}
+                    <Button
+                        danger
+                        type="primary"
+                        loading={loading}
+                        disabled={loading}
+                        style={{ flex: 1, background: "#f5222d", borderColor: "#f5222d" }}
+                        onClick={() => setReasonModalOpen(true)}
                     >
-                        <Button
-                            danger
-                            type="primary"
-                            loading={loading}
-                            disabled={loading}
-                            style={{ flex: 1, background: "#f5222d", borderColor: "#f5222d" }}
-                        >
-                            Reject
-                        </Button>
-                    </Popconfirm>
+                        Reject
+                    </Button>
 
-                    <Popconfirm
-                        title="Accept Task"
-                        description="Do you want to accept this task?"
-                        okText="Yes"
-                        cancelText="No"
-                        onConfirm={() => onSubmit('APPROVE')}
-                        onCancel={""}
+                    <Button
+                        type="primary"
+                        loading={loading}
+                        disabled={loading}
+                        style={{ flex: 1, background: "#52b167", borderColor: "#52b167" }}
+                        onClick={() => onSubmit("APPROVED")}
                     >
-                        <Button
-                            type="primary"
-                            loading={loading}
-                            disabled={loading}
-                            style={{ flex: 1, background: "#52b167", borderColor: "#52b167" }}
-                        >
-                            Accept
-                        </Button>
-                    </Popconfirm>
+                        Accept
+                    </Button>
+
+                    <Modal
+                        title="Reject Reason"
+                        open={reasonModalOpen}
+                        onOk={() => onSubmit("REJECTED", rejectReason)}
+                        onCancel={() => setReasonModalOpen(false)}
+                        okButtonProps={{ disabled: !rejectReason.trim() }}
+                    >
+                        <Input.TextArea
+                            value={rejectReason}
+                            onChange={(e) => setRejectReason(e.target.value)}
+                            placeholder="Please provide a reason for rejection"
+                            rows={4}
+                        />
+                    </Modal>
                 </Flex>
-            )
-        };
-        return null
+            );
+        }
+        return null;
     };
+
 
 
     return (

@@ -1,3 +1,4 @@
+import 'antd/dist/reset.css';
 import { useEffect, useState } from "react";
 import AuthRoutes from "./routes/Auth";
 import ProtectedRoutes from "./routes/Protected";
@@ -8,8 +9,7 @@ import { PageWrapper } from "./container";
 import "./App.css";
 import "../src/pages/dashboard/Dashboard.css";
 import  UpdateUserPersonalDetailsForm  from "./components/userPersonalDetailsModal/Index";
-// import UserPersonalDetailsForm from "./components";
-
+import "./Media.css"
 const renderAppRoutes = ({ isLoggedIn, isFilledPersonalDocs, loading, isOpen, setIsOpen }) => {
  
    if (loading) {

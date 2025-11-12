@@ -136,7 +136,6 @@ const Approvals = () => {
     ];
 
     const pageHeaderProps = {
-        // renderBack: true,
         title: "Approvals"
     }
 
