@@ -3,9 +3,9 @@ version: "3.3"
 services:
   backend:
     build: ./backend
-    container_name: backend
+    container_name: backend   #Name of the directory
     expose:
-      - "5000"
+      - "5000"   
     environment:
       - NODE_ENV=production
     restart: always
