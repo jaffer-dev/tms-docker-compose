@@ -4,8 +4,8 @@ services:
   backend:
     build: ./backend
     container_name: backend   #Name of the directory
-    expose:
-      - "5000"   
+    port:
+      - "6000:6000"   
     environment:
       - NODE_ENV=production
     restart: always
