@@ -25,9 +25,6 @@ exports.applyLeave = async (req, res) => {
     const today = new Date();
     const days = differenceInCalendarDays(end, start) + 1;
 
-    // ---------------------------------------------------
-    // 📁 File Upload (optional)
-    // ---------------------------------------------------
     let fileMeta = {};
     if (req.file) {
       fileMeta = {
@@ -38,24 +35,16 @@ exports.applyLeave = async (req, res) => {
       };
     }
 
-    // ---------------------------------------------------
-    // 🧭 SINGLE-DAY LEAVES (WFH, CASUAL)
-    // ---------------------------------------------------
     if (['WFH', 'CASUAL'].includes(category)) {
-      // ⛔ Throw error if more than 1 day selected
       if (days > 1) {
         return res.status(400).json({
           error: true, message: `${category} leave can only be applied for one day.`,
         });
       }
 
-      // Force same date for DB consistency
       toDate = fromDate;
     }
 
-    // ---------------------------------------------------
-    // 🚫 Overlapping Leave Check
-    // ---------------------------------------------------
     const overlap = await Leave.findOne({
       userId,
       $or: [{ fromDate: { $lte: toDate }, toDate: { $gte: fromDate } }],
@@ -66,9 +55,6 @@ exports.applyLeave = async (req, res) => {
       return res.status(400).json({ error: true, message: 'Overlapping leave already exists.' });
     }
 
-    // ---------------------------------------------------
-    // 🏠 WFH RULES
-    // ---------------------------------------------------
     if (category === 'WFH') {
       // ✅ Must be applied before 11:00 AM for same-day
       if (start.toDateString() === today.toDateString()) {
@@ -81,7 +67,6 @@ exports.applyLeave = async (req, res) => {
         }
       }
 
-      // ✅ Only 1 WFH allowed per week
       const weekStart = startOfWeek(start, { weekStartsOn: 0 });
       const weekEnd = endOfWeek(start, { weekStartsOn: 0 });
 
@@ -99,9 +84,6 @@ exports.applyLeave = async (req, res) => {
       }
     }
 
-    // ---------------------------------------------------
-    // 📅 ANNUAL LEAVE RULE
-    // ---------------------------------------------------
     if (category === 'ANNUAL') {
       const diff = differenceInCalendarDays(start, today);
       if (diff < 30) {
@@ -111,9 +93,6 @@ exports.applyLeave = async (req, res) => {
       }
     }
 
-    // ---------------------------------------------------
-    // 💼 CASUAL LEAVE RULE (in addition to single-day)
-    // ---------------------------------------------------
     if (category === 'CASUAL') {
       const existingCasual = await Leave.findOne({
         userId,
@@ -128,18 +107,13 @@ exports.applyLeave = async (req, res) => {
       }
     }
 
-    // ---------------------------------------------------
-    // 🤒 SICK LEAVE RULE
-    // ---------------------------------------------------
     if (category === 'SICK' && days > 2) {
-      // ✅ Require medical certificate
       if (!req.file) {
         return res.status(400).json({
           error: true, message: 'Medical certificate is required for sick leave longer than 2 days.',
         });
       }
 
-      // ✅ Deduct from Annual Leave if longer than 2 days
       const balance = await LeaveBalance.findOne({ userId });
       if (!balance || balance.remaining.annual < days) {
         return res.status(400).json({
@@ -152,9 +126,6 @@ exports.applyLeave = async (req, res) => {
       await balance.save();
     }
 
-    // ---------------------------------------------------
-    // 💰 Leave Balance Validation (Non-WFH)
-    // ---------------------------------------------------
     if (category !== 'WFH') {
       const balance = await LeaveBalance.findOne({ userId });
       const key = category.toLowerCase();
@@ -166,17 +137,11 @@ exports.applyLeave = async (req, res) => {
       }
     }
 
-    // ---------------------------------------------------
-    // 🔄 Initial Status Logic
-    // ---------------------------------------------------
     let initialStatus = 'PENDING_HOD';
     if (user.role === 'HOD') {
       initialStatus = 'PENDING_SUPER_ADMIN';
     }
 
-    // ---------------------------------------------------
-    // ✅ Create Leave Entry
-    // ---------------------------------------------------
     const leave = await Leave.create({
       userId,
       category,
@@ -262,9 +227,6 @@ exports.updateLeaveStatus = async (req, res) => {
     const approver = await User.findById(approverId).populate('department');
     const requester = leave.userId;
 
-    // ---------------------------
-    // 🎯 Approval Logic
-    // ---------------------------
     if (approver.role === 'HOD') {
       // HOD approval
       leave.hodApproval = {
@@ -281,17 +243,16 @@ exports.updateLeaveStatus = async (req, res) => {
         by: approverId,
         at: new Date(),
         status,
-        remarks, // ✅ Save remarks
+        remarks,
       };
       leave.status = status === 'APPROVED' ? 'PENDING_HR' : 'REJECTED';
     }
     else if (['SUB_ADMIN', 'HR', 'MANAGER'].includes(approver.role)) {
-      // HR / SUB_ADMIN / MANAGER final approval
       leave.hrApproval = {
         by: approverId,
         at: new Date(),
         status,
-        remarks, // ✅ Save remarks
+        remarks,
       };
       leave.status = status === 'APPROVED' ? 'APPROVED' : 'REJECTED';
 
@@ -340,9 +301,6 @@ exports.fetchApprovals = async (req, res) => {
     const { role, department } = user;
     let filter = {};
 
-    // ----------------------------
-    // 🎯 Filter based on role
-    // ----------------------------
     switch (role) {
       case 'EMPLOYEE':
         // case 'MEMBER':
@@ -352,19 +310,16 @@ exports.fetchApprovals = async (req, res) => {
 
       case 'HOD':
       case 'SUPERVISOR':
-        // Show department leaves pending HOD approval
         filter = { status: 'PENDING_HOD', department: department?._id };
         break;
 
       case 'SUPER_ADMIN':
-        // Show leaves pending SUPER_ADMIN approval
         filter = { status: 'PENDING_SUPER_ADMIN' };
         break;
 
       case 'SUB_ADMIN':
       case 'HR':
       case 'MANAGER':
-        // HR/SubAdmin/Manager can see all pending or completed
         filter = {};
         break;
 
@@ -372,9 +327,6 @@ exports.fetchApprovals = async (req, res) => {
         filter = { userId: user._id };
     }
 
-    // ----------------------------
-    // 🧩 Fetch leaves with full tracking info
-    // ----------------------------
     const leaves = await Leave.find(filter)
       .populate('userId', 'username email role department')
       .populate('hodApproval.by', 'username email role')
@@ -382,9 +334,6 @@ exports.fetchApprovals = async (req, res) => {
       .populate('hrApproval.by', 'username email role')
       .sort({ createdAt: -1 });
 
-    // ----------------------------
-    // 🧾 Prepare response with tracking details
-    // ----------------------------
     const detailedLeaves = leaves.map((leave) => ({
       _id: leave._id,
       employee: leave.userId?.username,
@@ -441,7 +390,7 @@ exports.fetchApprovals = async (req, res) => {
 
 exports.applyLeaveReq = async (req, res) => {
   try {
-    const { id: userId } = req.user;
+    const { id: userId, role } = req.user;
     const { category, fromDate, toDate, reason, fileMeta } = req.body;
 
     const user = await UserPersonalDetails.findOne({ userId })
@@ -480,11 +429,16 @@ exports.applyLeaveReq = async (req, res) => {
       });
     }
 
-    // validate single-day leave
+    const balance = await LeaveBalance.findOne({ userId });
+    if (!balance || balance.remaining.annual < days) {
+      return res.status(400).json({
+        error: true, message: 'Not enough annual leave balance for long sick leave.',
+      });
+    }
+
     if ([LEAVE_TYPE_CONSTANTS.WFH, LEAVE_TYPE_CONSTANTS.CASUAL].includes(category) && days > 1)
       return res.status(400).json({ error: true, message: `${category} can only be applied for one day.` });
 
-    // special handling for WFH
     if (category === LEAVE_TYPE_CONSTANTS.WFH && start.toDateString() === today.toDateString()) {
       const cutoff = new Date();
       cutoff.setHours(WFH_CUTOFF_HOUR, 0, 0, 0);
@@ -492,16 +446,30 @@ exports.applyLeaveReq = async (req, res) => {
         return res.status(400).json({ error: true, message: 'WFH for today must be applied before 11:00 AM.' });
     }
 
-    const leave = await Leave.create({
-      userId,
-      category,
-      fromDate,
-      toDate ,
-      days,
-      reason,
-      status: initialStatus,
-      meta: fileMeta,
-    });
+    if (category === LEAVE_TYPE_CONSTANTS.SICK) {
+      if (days >= 2) {
+        if (!fileMeta?.length) {
+          return res.status(400).json({ error: true, message: 'Medical certificate required !' })
+        }
+      }
+
+      if (days >= 3) {
+        balance.remaining.annual -= days;
+        balance.totalLeaves -= days;
+        await balance.save();
+      }
+    }
+
+    // const leave = await Leave.create({
+    //   userId,
+    //   category,
+    //   fromDate,
+    //   toDate,
+    //   days,
+    //   reason,
+    //   status: initialStatus,
+    //   meta: fileMeta,
+    // });
 
     // future: handle other leave types if needed (CASUAL, SICK, ANNUAL)
     return res.status(200).json({
