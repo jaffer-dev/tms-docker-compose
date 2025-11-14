@@ -5,7 +5,7 @@ import { TOKEN } from "./Constants";
 
 // const BASE_URL = 'https://backend-production-c45e.up.railway.app/api'
 // const BASE_URL = 'http://192.168.105.189:5000/api'
-const BASE_URL = 'https://10.10.5.108:6000/api'
+const BASE_URL = 'https://10.10.5.108:8080/api'
 // const BASE_URL = 'http://192.168.0.111:5000/api'
 // const BASE_URL = 'https://6449e930925b.ngrok-free.app/api'
 
