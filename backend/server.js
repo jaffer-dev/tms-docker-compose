@@ -15,6 +15,15 @@ app.use(express.static(path.join(__dirname, "public")));
 
 connectDB();
 
+
+app.use((req, res, next) => {
+    const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    console.log(`[${req.method}] ${fullUrl}`);
+    next();
+});
+
+app.use("/api", routes);
+
 app.use("/api", routes);
 app.get("/", (req, res) => res.send("API is running..."));
 
