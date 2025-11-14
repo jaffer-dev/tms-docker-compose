@@ -8,24 +8,35 @@ on:
 jobs:
   deploy:
     name: Deploy on Private Server
-    runs-on: self-hosted   # uses your self-hosted runner
+    runs-on: self-hosted   # your self-hosted runner on the server
 
     steps:
+      # Get latest code
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Deploy with Docker Compose
         run: |
-          echo "Pulling latest code..."
+          echo "-----------------------------------------"
+          echo "Pulling latest code on server..."
+          echo "-----------------------------------------"
           git pull origin main || true
-          
-          echo "Stopping existing containers..."
+
+          echo "-----------------------------------------"
+          echo "Stopping containers..."
+          echo "-----------------------------------------"
           docker-compose down
-          
-          echo "Building containers..."
-          docker-compose build --no-cache
-          
+
+          echo "-----------------------------------------"
+          echo "Building containers (using cache)..."
+          echo "-----------------------------------------"
+          docker-compose build     # cache-enabled build, FAST
+
+          echo "-----------------------------------------"
           echo "Starting containers..."
+          echo "-----------------------------------------"
           docker-compose up -d
-          
+
+          echo "-----------------------------------------"
           echo "Deployment complete!"
+          echo "-----------------------------------------"
