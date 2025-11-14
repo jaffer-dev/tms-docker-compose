@@ -4,7 +4,7 @@ services:
   backend:
     build: ./backend
     container_name: backend   #Name of the directory
-    port:
+    ports:
       - "6000:6000"   
     environment:
       - NODE_ENV=production
